@@ -1,0 +1,60 @@
+---
+import { SERVICES } from "../../consts/services";
+---
+
+<section class="py-16 sm:py-20 bg-agra_green">
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div class="flex flex-col gap-8 sm:gap-8">
+      <h2 class="text-xl font-medium font-roboto text-white tracking-tight">
+        ↪ ¿Qué soluciones ofrecemos?
+      </h2>
+      <div class="gap-8 lg:grid-cols-3">
+        <ul id="servicesList">
+          {
+            SERVICES.map((service, i) => (
+              <li
+                id={"service" + i}
+                class="cursor-pointer w-fit text-white  transition-opacity 0.5s ease"
+                onmouseover={"handleMouseOver(" + i + ")"}
+                onmouseleave="handleMouseLeave()"
+              >
+                <h3 class="font-roboto font-medium text-4xl lg:text-7xl">
+                  {service.name}
+                </h3>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { SERVICES } from "../../consts/services";
+
+  function handleMouseOver(index: number) {
+    for (let i = 0; i < SERVICES.length; i++) {
+      if (i !== index) {
+        document.getElementById("service" + i).classList.add("opacity-50");
+      }
+    }
+  }
+
+  function handleMouseLeave() {
+    for (let i = 0; i < SERVICES.length; i++) {
+      document.getElementById("service" + i).classList.remove("opacity-50");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    for (let i = 0; i < SERVICES.length; i++) {
+      document
+        .getElementById("service" + i)
+        .addEventListener("mouseover", () => handleMouseOver(i));
+      document
+        .getElementById("service" + i)
+        .addEventListener("mouseleave", handleMouseLeave);
+    }
+  });
+</script>
